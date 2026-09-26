@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Study Link Counselor OS - Master Architecture Guide</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm 18mm 16mm;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.45;
+      font-size: 11pt;
+      margin: 0;
+      padding: 0;
+    }
+    .header-box {
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+    }
+    .badge {
+      display: inline-block;
+      background: #e2e8f0;
+      color: #0f172a;
+      font-size: 8.5pt;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    h1 {
+      font-size: 20pt;
+      margin: 4px 0 6px 0;
+      color: #0f172a;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      font-size: 11pt;
+      color: #475569;
+      font-weight: 500;
+      margin: 0;
+    }
+    h2 {
+      font-size: 13pt;
+      color: #0f172a;
+      border-left: 4px solid #2563eb;
+      padding-left: 8px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    p, li {
+      color: #334155;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      margin-bottom: 14px;
+      font-size: 9pt;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    .flow-diagram {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 8.5pt;
+      line-height: 1.3;
+      margin: 12px 0;
+      white-space: pre;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+    .callout {
+      background-color: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 10px 14px;
+      margin: 12px 0;
+      border-radius: 0 4px 4px 0;
+      font-size: 9.5pt;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-box">
+    <div class="badge">Next.js App Router Architecture</div>
+    <h1>Study Link Counselor OS: System Requirement & Operational Guide</h1>
+    <div class="subtitle">Rapid 3-Minute Triage Engine + 10-Country Rules Matrix + Counselor CRM Pipeline</div>
+  </div>
+
+  <h2>1. Executive Summary & Operating Principles</h2>
+  <p>
+    This contract governs the implementation of the <strong>Study Link Counselor OS</strong>. It is designed for front-line educational counselors handling high-velocity inquiry calls. In a 3-minute phone interaction, the system evaluates candidate eligibility against 10 destination countries, highlights relevant hooks, and records the lead into an appointment conversion pipeline.
+  </p>
+
+  <div class="callout">
+    <strong>Non-Negotiable System Constraint:</strong> The frontend is read-heavy. All 10 country rules, qualifications, and pitch scripts reside in deterministic client-side JSON configurations. Search and eligibility calculation must resolve in under 50 milliseconds without external API delays.
+  </div>
+
+  <h2>2. 3-Minute Call Flow Architecture</h2>
+  <div class="flow-diagram">
+[0:00 - 0:45] TRIAGE (Highest Qual, Gap Years, English Test Status)
+      │
+      ▼
+[0:46 - 2:00] MATCH (Latvia, Malta, UK, Finland, Germany, Lithuania, Ireland, Cyprus, Malaysia, Dubai)
+      │
+      ▼
+[2:01 - 3:00] APPOINTMENT HOOK ("Deadlines close in 2 weeks; bring certificates to Nugegoda tomorrow.")
+      │
+      ▼
+[3:01 - 3:30] CRM AUTO-LOG (WhatsApp Number, Target Intake, Auto-WhatsApp Confirmation)
+  </div>
+
+  <h2>3. Top 10 Study Destination Triage Matrix</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 14%;">Country</th>
+        <th style="width: 16%;">Age / Gap Limit</th>
+        <th style="width: 22%;">Academic Entry</th>
+        <th style="width: 24%;">English Requirement</th>
+        <th style="width: 24%;">Bank Proof & Initial Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Latvia</strong></td>
+        <td>UG &lt; 30, PG &lt; 45<br>Gap: 5–8 yrs w/ exp</td>
+        <td>UG: 3C / 2C 1S in A/L<br>PG: 3-yr Bachelor (2.5 GPA)</td>
+        <td>Duolingo 100+, IELTS 6.0, or Skype interview; MOI accepted for PG</td>
+        <td>~€7,200 living deposit + 1st year tuition (~€3,500)</td>
+      </tr>
+      <tr>
+        <td><strong>Malta</strong></td>
+        <td>Up to 40 yrs<br>Gap: 10 yrs accepted</td>
+        <td>UG: O/L for L5 Diploma, 3S in A/L for L6 Degree</td>
+        <td>Internal test OK; IELTS 6.0 waives €300 test fee</td>
+        <td>€9,000–€10,000 bank statement</td>
+      </tr>
+      <tr>
+        <td><strong>Finland</strong></td>
+        <td>Flexible (up to 45)<br>Gap: Lenient</td>
+        <td>UG: 3 A/L passes + Entrance Exam<br>PG: Bachelor + 2 yrs exp</td>
+        <td>UAS entrance exam; IELTS 6.0; Duolingo 105+</td>
+        <td>€6,720/year in student's personal account</td>
+      </tr>
+      <tr>
+        <td><strong>Lithuania</strong></td>
+        <td>UG &lt; 28, PG &lt; 40<br>Gap: 3–5 yrs</td>
+        <td>UG: 3 passes in A/L<br>PG: Bachelor's degree</td>
+        <td>Internal university Skype interview or IELTS 5.5–6.0</td>
+        <td>€5,000–€6,000 living funds proof</td>
+      </tr>
+      <tr>
+        <td><strong>Germany</strong></td>
+        <td>UG &lt; 26, PG &lt; 35<br>Gap: &lt; 3–4 yrs</td>
+        <td>UG: 13-yr schooling / Studienkolleg<br>PG: 4-yr Bachelor degree</td>
+        <td>IELTS 6.0–6.5 (Private unis accept Duolingo)</td>
+        <td>Blocked account (€11,904) + Semester fees</td>
+      </tr>
+      <tr>
+        <td><strong>United Kingdom</strong></td>
+        <td>UG &lt; 25, PG &lt; 38<br>Gap: 2–5 yrs</td>
+        <td>UG: A/L passes or Foundation<br>PG: Bachelor (Pass / 2.2)</td>
+        <td>O/L English Credit ('C' or 'B') gives full waiver; IELTS 6.0</td>
+        <td>28-Day Rule: Tuition balance + £10,230 living funds</td>
+      </tr>
+      <tr>
+        <td><strong>Ireland</strong></td>
+        <td>UG &lt; 24, PG &lt; 35<br>Gap: &lt; 3 yrs</td>
+        <td>UG: High A/Ls (B/C avg)<br>PG: 2.1 or high 2.2 degree</td>
+        <td>Strictly IELTS 6.5 or Duolingo 110+</td>
+        <td>€10,000 6-month clear banking history</td>
+      </tr>
+      <tr>
+        <td><strong>Cyprus</strong></td>
+        <td>UG &lt; 32, PG &lt; 40<br>Gap: 5–7 yrs</td>
+        <td>UG: O/L or A/L passes<br>PG: Bachelor's degree</td>
+        <td>Direct admission via internal college test</td>
+        <td>€5,000–€7,000 funds verification</td>
+      </tr>
+      <tr>
+        <td><strong>Malaysia</strong></td>
+        <td>Up to 40 yrs<br>Gap: Lenient</td>
+        <td>UG: 5 O/Ls (Foundation) or 2 A/Ls (Degree)</td>
+        <td>Internal placement program or IELTS 5.0–5.5</td>
+        <td>LKR 3–4 Million bank guarantee statement</td>
+      </tr>
+      <tr>
+        <td><strong>Dubai (UAE)</strong></td>
+        <td>Up to 50+ yrs<br>Gap: Freely accepted</td>
+        <td>UG: O/L or A/L passes<br>PG: Degree or Diploma</td>
+        <td>No IELTS mandatory; direct internal admission</td>
+        <td>Lowest scrutiny; visa issued via university sponsor</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2>4. Lead CRM Pipeline & Operational Tracking</h2>
+  <p>Every lead captured through social inquiries or direct phone calls flows through 6 standardized stages:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Stage</th>
+        <th>Definition & Counselor Objective</th>
+        <th>System Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. New Lead</strong></td>
+        <td>Uncontacted inquiry from Facebook, TikTok, or Website.</td>
+        <td>Highlights lead in red if uncalled after 15 minutes.</td>
+      </tr>
+      <tr>
+        <td><strong>2. Triaged</strong></td>
+        <td>3-minute qualification call completed; country fit identified.</td>
+        <td>Tags matched country and attaches customized script hook.</td>
+      </tr>
+      <tr>
+        <td><strong>3. Appointment Set</strong></td>
+        <td>Candidate committed to visit Nugegoda office or attend Zoom session.</td>
+        <td>Dispatches WhatsApp confirmation with location pin & checklist.</td>
+      </tr>
+      <tr>
+        <td><strong>4. File Opened</strong></td>
+        <td>Student visited office, provided passport/marksheets, paid advance.</td>
+        <td>Creates document verification checklist (AIC, VFS, etc.).</td>
+      </tr>
+      <tr>
+        <td><strong>5. Visa Lodged</strong></td>
+        <td>Application submitted to university and visa lodged at VFS/Embassy.</td>
+        <td>Sets interview preparation reminders and embassy trackers.</td>
+      </tr>
+      <tr>
+        <td><strong>6. Closed / Enrolled</strong></td>
+        <td>Visa approved, tuition finalized, and flight details scheduled.</td>
+        <td>Marks deal as won and updates intake conversion analytics.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>5. Next.js App Router Implementation Directory</h2>
+  <div class="flow-diagram">
+app/
+├── layout.tsx                   // Root layout with counselor navigation bar
+├── page.tsx                     // Triage Dashboard & Active Lead Kanban
+├── countries/page.tsx           // Searchable 10-Country Rules Table
+├── api/leads/route.ts           // Local Node fs/promises JSON storage handler
+components/
+├── triage/
+│   ├── QuickTriageEngine.tsx    // Real-time qualification filter
+│   ├── CountryCard.tsx          // Match display card with qualification badges
+│   └── CallScriptModal.tsx      // In-call appointment booking script
+├── pipeline/
+│   ├── KanbanBoard.tsx          // Pipeline view with drag/drop or stage selects
+│   └── LeadCard.tsx             // Contact details with 1-click WhatsApp shortcut
+lib/
+├── types.ts                     // Typed definitions for rules and student profiles
+├── matcher.ts                   // Pure in-memory matching algorithm
+└── data/
+    ├── country-rules.json       // Complete 10-country rules matrix
+    └── initial-leads.json       // Sample seed leads
+  </div>
+
+  <h2>6. Definition of Done (Quality Gate)</h2>
+  <ul>
+    <li><strong>Sub-50ms Calculation:</strong> Filtering by age, gap, and qualifications dynamically highlights eligible countries without full-page reloads.</li>
+    <li><strong>One-Click WhatsApp Integration:</strong> Clicking the student phone number triggers <code>wa.me/94...</code> with a pre-filled appointment reminder.</li>
+    <li><strong>Zero External Database Dependency:</strong> Leads and updates persist reliably to <code>localStorage</code> or <code>data/leads.json</code> for lightweight, maintenance-free operations.</li>
+  </ul>
+</body>
+</html>
