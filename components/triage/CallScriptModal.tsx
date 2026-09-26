@@ -1,5 +1,5 @@
 import { CountryRule } from '@/lib/types';
-import { X, PhoneCall } from 'lucide-react';
+import { X, PhoneCall, Quote, User, Calendar, MessageSquare, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 
 interface CallScriptModalProps {
@@ -20,73 +20,112 @@ export function CallScriptModal({ country, onClose, onLeadCaptured }: CallScript
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-xl shadow-xl max-w-md w-full overflow-hidden">
-        <div className="bg-blue-600 p-4 text-white flex justify-between items-center">
-          <h2 className="text-xl font-bold flex items-center gap-2">
-            <PhoneCall className="w-5 h-5" />
-            Pitching {country.name}
-          </h2>
-          <button onClick={onClose} className="hover:bg-blue-700 p-1 rounded">
-            <X className="w-5 h-5" />
-          </button>
+    <div className="fixed inset-0 bg-gray-900/40 backdrop-blur-md flex items-center justify-center p-4 z-50">
+      <div 
+        className="bg-white rounded-[32px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1),0_0_0_1px_rgba(0,0,0,0.05)] max-w-lg w-full overflow-hidden transform transition-all duration-300 scale-100 opacity-100"
+      >
+        {/* Elegant Header */}
+        <div className="px-8 pt-8 pb-6 flex justify-between items-start relative">
+          <div className="absolute top-0 right-0 p-6">
+            <button 
+              onClick={onClose} 
+              className="bg-gray-50 hover:bg-gray-100 text-gray-400 hover:text-gray-600 p-2.5 rounded-full transition-all border border-gray-100"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          
+          <div>
+            <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-4 border border-blue-100 shadow-sm">
+              <PhoneCall className="w-6 h-6" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
+              Pitching {country.name}
+            </h2>
+            <p className="text-sm text-gray-500 mt-1">Read the script below and capture the lead</p>
+          </div>
         </div>
         
-        <div className="p-6">
-          <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-6">
-            <p className="font-semibold text-blue-900 mb-2">Appointment Hook Script:</p>
-            <p className="text-blue-800 italic leading-relaxed">
-              "{country.hookScript}"
-            </p>
+        <div className="px-8 pb-8 space-y-8">
+          {/* Script Card */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100/50 rounded-2xl p-6 relative group overflow-hidden">
+            <div className="absolute top-0 right-0 -mt-4 -mr-4 text-blue-200 opacity-30 transform -scale-x-100">
+              <Quote className="w-24 h-24" />
+            </div>
+            <div className="relative z-10">
+              <p className="text-xs font-bold text-blue-800 uppercase tracking-widest mb-3 flex items-center gap-1.5">
+                <MessageSquare className="w-3.5 h-3.5" />
+                Live Hook Script
+              </p>
+              <p className="text-blue-900 text-base md:text-lg italic leading-relaxed font-medium">
+                "{country.hookScript}"
+              </p>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <h3 className="font-semibold text-gray-800 border-b pb-2">Log Lead Details</h3>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Student Name</label>
-              <input 
-                type="text" 
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                placeholder="Kasun Silva"
-              />
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="flex items-center gap-3">
+              <div className="h-px bg-gray-200 flex-1"></div>
+              <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Log Lead</span>
+              <div className="h-px bg-gray-200 flex-1"></div>
             </div>
             
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">WhatsApp Number</label>
-              <input 
-                type="tel" 
-                required
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                placeholder="+94 77 123 4567"
-              />
-            </div>
+            <div className="space-y-4">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                  <User className="w-5 h-5 text-gray-400" />
+                </div>
+                <input 
+                  type="text" 
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="block w-full pl-11 pr-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 sm:text-sm transition-all"
+                  placeholder="Student Name (e.g. Kasun Silva)"
+                />
+              </div>
+              
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                  <PhoneCall className="w-5 h-5 text-gray-400" />
+                </div>
+                <input 
+                  type="tel" 
+                  required
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="block w-full pl-11 pr-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 sm:text-sm transition-all"
+                  placeholder="WhatsApp Number (+94...)"
+                />
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Target Intake</label>
-              <select 
-                value={intake}
-                onChange={(e) => setIntake(e.target.value)}
-                className="w-full border rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              >
-                <option value="">Select Intake</option>
-                <option value="Sept/Oct 2024">Sept/Oct 2024</option>
-                <option value="Jan/Feb 2025">Jan/Feb 2025</option>
-                <option value="May/June 2025">May/June 2025</option>
-              </select>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                  <Calendar className="w-5 h-5 text-gray-400" />
+                </div>
+                <select 
+                  value={intake}
+                  onChange={(e) => setIntake(e.target.value)}
+                  className="block w-full pl-11 pr-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 sm:text-sm transition-all appearance-none"
+                >
+                  <option value="" disabled className="text-gray-400">Select Target Intake...</option>
+                  <option value="Sept/Oct 2024">Sept/Oct 2024</option>
+                  <option value="Jan/Feb 2025">Jan/Feb 2025</option>
+                  <option value="May/June 2025">May/June 2025</option>
+                </select>
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+              </div>
             </div>
 
             <div className="pt-2">
               <button 
                 type="submit"
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 rounded-lg transition-colors flex justify-center items-center gap-2"
+                className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-3.5 rounded-xl transition-all shadow-sm flex justify-center items-center gap-2 group"
               >
-                Log Lead & Set Appointment
+                Capture Lead & Close
+                <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors group-hover:translate-x-1" />
               </button>
             </div>
           </form>
