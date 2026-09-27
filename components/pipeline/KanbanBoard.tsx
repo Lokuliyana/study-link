@@ -73,12 +73,11 @@ export function KanbanBoard() {
     e.preventDefault();
     if (!newLeadName || !newLeadPhone) return;
 
-    const newLead = {
+    const newLead: Lead = {
       id: crypto.randomUUID(),
       name: newLeadName,
       phone: newLeadPhone,
-      targetIntake: 'TBD',
-      stage: 'New Lead' as PipelineStage,
+      stage: 'New Lead',
       createdAt: new Date().toISOString(),
       needsFollowUp: false,
     };

@@ -23,7 +23,7 @@ export function CountryCard({ country, onSelect }: CountryCardProps) {
             </div>
             <div className="pt-1.5">
               <p className="text-gray-900 font-medium leading-none mb-1">Age & Gap</p>
-              <p className="text-gray-500 text-xs">UG &lt; {country.ageLimitUG} | PG &lt; {country.ageLimitPG}</p>
+              <p className="text-gray-500 text-xs">Age &lt; {country.ageLimit}</p>
               <p className="text-gray-500 text-xs">Max Gap: {country.gapYearsAccepted} yrs</p>
             </div>
           </div>
@@ -35,12 +35,12 @@ export function CountryCard({ country, onSelect }: CountryCardProps) {
             <div className="pt-1.5 w-full">
               <p className="text-gray-900 font-medium leading-none mb-1">Academics Accepted</p>
               <div className="flex flex-wrap gap-1 mt-2">
-                {country.acceptedUgQuals && country.acceptedUgQuals.slice(0,3).map(q => (
-                  <span key={q} className="bg-gray-100 text-gray-600 text-[10px] px-1.5 py-0.5 rounded border border-gray-200">{q}</span>
+                {country.acceptedOlQuals && country.acceptedOlQuals.slice(0,3).map(q => (
+                  <span key={q} className="bg-gray-100 text-gray-600 text-[10px] px-1.5 py-0.5 rounded border border-gray-200">{q} (O/L)</span>
                 ))}
-                {country.acceptedUgQuals && country.acceptedUgQuals.length > 3 && (
-                  <span className="bg-gray-50 text-gray-400 text-[10px] px-1.5 py-0.5 rounded border border-gray-100">+{country.acceptedUgQuals.length - 3}</span>
-                )}
+                {country.acceptedDegreeStatus && country.acceptedDegreeStatus.slice(0,2).map(q => (
+                  <span key={q} className="bg-gray-100 text-gray-600 text-[10px] px-1.5 py-0.5 rounded border border-gray-200">{q} (Degree)</span>
+                ))}
               </div>
             </div>
           </div>

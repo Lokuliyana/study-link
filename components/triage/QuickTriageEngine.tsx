@@ -1,23 +1,34 @@
 "use client";
 
-import { useState, useMemo, useEffect } from 'react';
-import { StudentProfile, CountryRule } from '@/lib/types';
+import { useState, useMemo, useEffect, useRef } from 'react';
+import { StudentProfile, CountryRule, OLQualification, ALQualification, DegreeStatus, GPAScore, DegreeClass } from '@/lib/types';
 import { matchCountries } from '@/lib/matcher';
 import { CountryCard } from './CountryCard';
 import { CallScriptModal } from './CallScriptModal';
-import { Sparkles, User, GraduationCap, Clock, CheckCircle } from 'lucide-react';
+import { Sparkles, User, Clock, CheckCircle } from 'lucide-react';
 
 export function QuickTriageEngine() {
   const [profile, setProfile] = useState<StudentProfile>({
     age: 20,
     gapYears: 0,
-    level: 'UG',
-    ugQual: 'A/L (3 Passes)',
+    olQual: 'Pass',
+    alQual: '3S',
+    degreeStatus: "Haven't done at all",
+    gpa: 'None',
+    degreeClass: 'None',
     englishTest: 'None',
   });
 
   const [selectedCountry, setSelectedCountry] = useState<CountryRule | null>(null);
   const [rules, setRules] = useState<CountryRule[]>([]);
+  const ageInputRef = useRef<HTMLInputElement>(null);
+
+  // Focus on mount
+  useEffect(() => {
+    if (ageInputRef.current) {
+      ageInputRef.current.focus();
+    }
+  }, []);
 
   // Fetch dynamic rules on mount so edits from the Matrix are immediately respected
   useEffect(() => {
@@ -29,16 +40,18 @@ export function QuickTriageEngine() {
   // Sub-50ms calculation
   const eligibleCountries = useMemo(() => matchCountries(profile, rules), [profile, rules]);
 
-  const handleLeadCaptured = async (leadData: { name: string; phone: string; intake: string }) => {
+  const handleLeadCaptured = async (leadData: { name: string; phone: string; appointmentDate: string; appointmentTime: string; profile: StudentProfile }) => {
     const newLead = {
       id: crypto.randomUUID(),
       name: leadData.name,
       phone: leadData.phone,
-      targetIntake: leadData.intake,
+      appointmentDate: leadData.appointmentDate,
+      appointmentTime: leadData.appointmentTime,
       stage: 'Appointment Set',
       matchedCountry: selectedCountry?.name,
       createdAt: new Date().toISOString(),
       needsFollowUp: false,
+      profile: leadData.profile,
     };
 
     try {
@@ -52,6 +65,10 @@ export function QuickTriageEngine() {
     } catch (error) {
       console.error('Failed to log lead', error);
     }
+  };
+
+  const updateProfile = (field: keyof StudentProfile, value: any) => {
+    setProfile(prev => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -74,30 +91,7 @@ export function QuickTriageEngine() {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-10 bg-gray-50/50 rounded-2xl p-6 border border-gray-100/80">
-          {/* Level Selection */}
-          <div className="space-y-3">
-            <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-              <GraduationCap className="w-4 h-4 text-gray-400" />
-              Study Level
-            </label>
-            <div className="flex gap-2">
-              {['UG', 'PG'].map((lvl) => (
-                <button
-                  key={lvl}
-                  onClick={() => setProfile({ ...profile, level: lvl as 'UG' | 'PG' })}
-                  className={`flex-1 py-2 px-3 rounded-full text-sm font-medium transition-all ${
-                    profile.level === lvl 
-                      ? 'bg-blue-600 text-white shadow-sm' 
-                      : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
-                  }`}
-                >
-                  {lvl === 'UG' ? 'Undergrad' : 'Postgrad'}
-                </button>
-              ))}
-            </div>
-          </div>
-          
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 bg-gray-50/50 rounded-2xl p-6 border border-gray-100/80">
           {/* Age & Gap */}
           <div className="space-y-3">
             <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
@@ -105,10 +99,11 @@ export function QuickTriageEngine() {
               Age
             </label>
             <input 
+              ref={ageInputRef}
               type="number" 
               className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
               value={profile.age || ''}
-              onChange={(e) => setProfile({ ...profile, age: parseInt(e.target.value) || 0 })}
+              onChange={(e) => updateProfile('age', parseInt(e.target.value) || 0)}
             />
           </div>
 
@@ -122,43 +117,117 @@ export function QuickTriageEngine() {
               className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
               value={profile.gapYears === 0 ? '' : profile.gapYears}
               placeholder="0"
-              onChange={(e) => setProfile({ ...profile, gapYears: parseInt(e.target.value) || 0 })}
+              onChange={(e) => updateProfile('gapYears', parseInt(e.target.value) || 0)}
             />
           </div>
 
-          {/* Qualifications Contextual Chips */}
-          <div className="space-y-3 col-span-1 lg:col-span-2">
-            <label className="text-sm font-semibold text-gray-700">Highest Qualification</label>
+          {/* O/L */}
+          <div className="space-y-3">
+            <label className="text-sm font-semibold text-gray-700">O/L Status</label>
             <div className="flex flex-wrap gap-2">
-              {profile.level === 'UG' ? (
-                ['O/L Only', 'A/L (2 Passes)', 'A/L (3 Passes)', 'A/L (High Grades)', 'Foundation'].map((q) => (
-                  <button
-                    key={q}
-                    onClick={() => setProfile({ ...profile, ugQual: q as any })}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
-                      profile.ugQual === q 
-                        ? 'bg-blue-100 text-blue-800 border-blue-200' 
-                        : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
-                    }`}
-                  >
-                    {q}
-                  </button>
-                ))
-              ) : (
-                ['Diploma', '3-Year Degree', '4-Year Degree', 'High GPA Degree'].map((q) => (
-                  <button
-                    key={q}
-                    onClick={() => setProfile({ ...profile, pgQual: q as any })}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
-                      profile.pgQual === q 
-                        ? 'bg-blue-100 text-blue-800 border-blue-200' 
-                        : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
-                    }`}
-                  >
-                    {q}
-                  </button>
-                ))
-              )}
+              {['Pass', 'Fail', 'None'].map((q) => (
+                <button
+                  key={q}
+                  onClick={() => updateProfile('olQual', q as OLQualification)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+                    profile.olQual === q 
+                      ? 'bg-blue-100 text-blue-800 border-blue-200' 
+                      : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* A/L */}
+          <div className="space-y-3">
+            <label className="text-sm font-semibold text-gray-700">A/L Result</label>
+            <div className="flex flex-wrap gap-2">
+              {['3S', '3C', '3B', 'None'].map((q) => (
+                <button
+                  key={q}
+                  onClick={() => updateProfile('alQual', q as ALQualification)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+                    profile.alQual === q 
+                      ? 'bg-blue-100 text-blue-800 border-blue-200' 
+                      : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Degree */}
+          <div className="space-y-3 col-span-1 md:col-span-2">
+            <label className="text-sm font-semibold text-gray-700">Degree Status</label>
+            <div className="flex flex-wrap gap-2">
+              {['Completed', 'Pending', "Haven't done at all"].map((q) => (
+                <button
+                  key={q}
+                  onClick={() => {
+                    updateProfile('degreeStatus', q as DegreeStatus);
+                    if (q === "Haven't done at all") {
+                      updateProfile('gpa', 'None');
+                      updateProfile('degreeClass', 'None');
+                    }
+                  }}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+                    profile.degreeStatus === q 
+                      ? 'bg-blue-100 text-blue-800 border-blue-200' 
+                      : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* GPA */}
+          <div className="space-y-3">
+            <label className="text-sm font-semibold text-gray-700">GPA</label>
+            <div className="flex flex-wrap gap-2">
+              {['2.0', '2.5', '3.0', 'None'].map((q) => (
+                <button
+                  key={q}
+                  disabled={profile.degreeStatus === "Haven't done at all"}
+                  onClick={() => updateProfile('gpa', q as GPAScore)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+                    profile.degreeStatus === "Haven't done at all" ? 'opacity-50 cursor-not-allowed bg-gray-100' :
+                    profile.gpa === q 
+                      ? 'bg-blue-100 text-blue-800 border-blue-200' 
+                      : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Degree Class */}
+          <div className="space-y-3 col-span-1 md:col-span-2">
+            <label className="text-sm font-semibold text-gray-700">Degree Class</label>
+            <div className="flex flex-wrap gap-2">
+              {['Second Class Lower', 'Second Class Upper', 'First Class', 'None'].map((q) => (
+                <button
+                  key={q}
+                  disabled={profile.degreeStatus === "Haven't done at all"}
+                  onClick={() => updateProfile('degreeClass', q as DegreeClass)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+                    profile.degreeStatus === "Haven't done at all" ? 'opacity-50 cursor-not-allowed bg-gray-100' :
+                    profile.degreeClass === q 
+                      ? 'bg-blue-100 text-blue-800 border-blue-200' 
+                      : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  {q}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -169,7 +238,7 @@ export function QuickTriageEngine() {
               {['None', 'IELTS', 'Duolingo'].map((test) => (
                 <button
                   key={test}
-                  onClick={() => setProfile({ ...profile, englishTest: test })}
+                  onClick={() => updateProfile('englishTest', test)}
                   className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                     profile.englishTest === test 
                       ? 'bg-gray-800 text-white shadow-sm' 
@@ -197,7 +266,7 @@ export function QuickTriageEngine() {
           ) : (
             <div className="py-16 text-center bg-gray-50/50 rounded-2xl border border-dashed border-gray-200">
               <p className="text-gray-400 font-medium">No countries match the current profile criteria.</p>
-              <p className="text-gray-400 text-sm mt-1">Try adjusting the age or gap years.</p>
+              <p className="text-gray-400 text-sm mt-1">Try adjusting the criteria.</p>
             </div>
           )}
         </div>
@@ -205,7 +274,8 @@ export function QuickTriageEngine() {
 
       {selectedCountry && (
         <CallScriptModal 
-          country={selectedCountry} 
+          country={selectedCountry}
+          profile={profile}
           onClose={() => setSelectedCountry(null)}
           onLeadCaptured={handleLeadCaptured}
         />

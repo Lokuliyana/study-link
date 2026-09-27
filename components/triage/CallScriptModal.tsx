@@ -1,22 +1,24 @@
-import { CountryRule } from '@/lib/types';
-import { X, PhoneCall, Quote, User, Calendar, MessageSquare, ChevronRight } from 'lucide-react';
+import { CountryRule, StudentProfile } from '@/lib/types';
+import { X, PhoneCall, Quote, User, Calendar, MessageSquare, ChevronRight, Clock } from 'lucide-react';
 import { useState } from 'react';
 
 interface CallScriptModalProps {
   country: CountryRule;
+  profile: StudentProfile;
   onClose: () => void;
-  onLeadCaptured: (leadData: { name: string; phone: string; intake: string }) => void;
+  onLeadCaptured: (leadData: { name: string; phone: string; appointmentDate: string; appointmentTime: string; profile: StudentProfile }) => void;
 }
 
-export function CallScriptModal({ country, onClose, onLeadCaptured }: CallScriptModalProps) {
+export function CallScriptModal({ country, profile, onClose, onLeadCaptured }: CallScriptModalProps) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [intake, setIntake] = useState('');
+  const [appointmentDate, setAppointmentDate] = useState('');
+  const [appointmentTime, setAppointmentTime] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !phone) return;
-    onLeadCaptured({ name, phone, intake: intake || 'Upcoming' });
+    onLeadCaptured({ name, phone, appointmentDate, appointmentTime, profile });
   };
 
   return (
@@ -66,7 +68,7 @@ export function CallScriptModal({ country, onClose, onLeadCaptured }: CallScript
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="flex items-center gap-3">
               <div className="h-px bg-gray-200 flex-1"></div>
-              <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Log Lead</span>
+              <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Book Appointment</span>
               <div className="h-px bg-gray-200 flex-1"></div>
             </div>
             
@@ -103,19 +105,26 @@ export function CallScriptModal({ country, onClose, onLeadCaptured }: CallScript
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                   <Calendar className="w-5 h-5 text-gray-400" />
                 </div>
-                <select 
-                  value={intake}
-                  onChange={(e) => setIntake(e.target.value)}
-                  className="block w-full pl-11 pr-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 sm:text-sm transition-all appearance-none"
-                >
-                  <option value="" disabled className="text-gray-400">Select Target Intake...</option>
-                  <option value="Sept/Oct 2024">Sept/Oct 2024</option>
-                  <option value="Jan/Feb 2025">Jan/Feb 2025</option>
-                  <option value="May/June 2025">May/June 2025</option>
-                </select>
-                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                  <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                <input
+                  type="date"
+                  required
+                  value={appointmentDate}
+                  onChange={(e) => setAppointmentDate(e.target.value)}
+                  className="block w-full pl-11 pr-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 sm:text-sm transition-all"
+                />
+              </div>
+
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                  <Clock className="w-5 h-5 text-gray-400" />
                 </div>
+                <input
+                  type="time"
+                  required
+                  value={appointmentTime}
+                  onChange={(e) => setAppointmentTime(e.target.value)}
+                  className="block w-full pl-11 pr-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 sm:text-sm transition-all"
+                />
               </div>
             </div>
 

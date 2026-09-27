@@ -2,11 +2,31 @@
   {
     "id": "latvia",
     "name": "Latvia",
-    "ageLimitUG": 29,
-    "ageLimitPG": 44,
+    "ageLimit": 44,
     "gapYearsAccepted": 8,
-    "acceptedUgQuals": ["A/L (3 Passes)", "A/L (High Grades)"],
-    "acceptedPgQuals": ["3-Year Degree", "4-Year Degree", "High GPA Degree"],
+    "acceptedOlQuals": [
+      "Pass",
+      "Fail"
+    ],
+    "acceptedAlQuals": [
+      "3S",
+      "3C",
+      "3B"
+    ],
+    "acceptedDegreeStatus": [
+      "Completed",
+      "Pending"
+    ],
+    "acceptedGpa": [
+      "2.0",
+      "2.5",
+      "3.0"
+    ],
+    "acceptedDegreeClass": [
+      "Second Class Lower",
+      "Second Class Upper",
+      "First Class"
+    ],
     "englishRequirement": "Duolingo 100+, IELTS 6.0, or Skype",
     "bankProofAndCost": "~€7,200 living deposit",
     "hookScript": "Latvia offers an incredibly fast processing time. If you bring your certificates to our Nugegoda office tomorrow, we can secure your offer letter this week."
@@ -14,11 +34,31 @@
   {
     "id": "malta",
     "name": "Malta",
-    "ageLimitUG": 40,
-    "ageLimitPG": 40,
+    "ageLimit": 40,
     "gapYearsAccepted": 10,
-    "acceptedUgQuals": ["O/L Only", "A/L (2 Passes)", "A/L (3 Passes)", "A/L (High Grades)", "Foundation"],
-    "acceptedPgQuals": ["3-Year Degree", "4-Year Degree", "High GPA Degree"],
+    "acceptedOlQuals": [
+      "Pass",
+      "Fail"
+    ],
+    "acceptedAlQuals": [
+      "3S",
+      "3C",
+      "3B"
+    ],
+    "acceptedDegreeStatus": [
+      "Completed",
+      "Pending"
+    ],
+    "acceptedGpa": [
+      "2.0",
+      "2.5",
+      "3.0"
+    ],
+    "acceptedDegreeClass": [
+      "Second Class Lower",
+      "Second Class Upper",
+      "First Class"
+    ],
     "englishRequirement": "Internal test OK",
     "bankProofAndCost": "€9,000–€10,000 bank statement",
     "hookScript": "Malta has the most lenient gap year policies in Europe. To take advantage of the upcoming intake, we need to apply immediately. Can you visit us tomorrow?"
@@ -26,11 +66,31 @@
   {
     "id": "finland",
     "name": "Finland",
-    "ageLimitUG": 45,
-    "ageLimitPG": 45,
+    "ageLimit": 45,
     "gapYearsAccepted": 15,
-    "acceptedUgQuals": ["A/L (3 Passes)", "A/L (High Grades)"],
-    "acceptedPgQuals": ["3-Year Degree", "4-Year Degree", "High GPA Degree"],
+    "acceptedOlQuals": [
+      "Pass",
+      "Fail"
+    ],
+    "acceptedAlQuals": [
+      "3S",
+      "3C",
+      "3B"
+    ],
+    "acceptedDegreeStatus": [
+      "Completed",
+      "Pending"
+    ],
+    "acceptedGpa": [
+      "2.0",
+      "2.5",
+      "3.0"
+    ],
+    "acceptedDegreeClass": [
+      "Second Class Lower",
+      "Second Class Upper",
+      "First Class"
+    ],
     "englishRequirement": "UAS entrance exam; IELTS 6.0",
     "bankProofAndCost": "€6,720/year personal account",
     "hookScript": "Finland is one of the happiest countries with high visa success. Deadlines close soon. Please bring your documents so we can start the entrance exam prep."
@@ -38,11 +98,31 @@
   {
     "id": "lithuania",
     "name": "Lithuania",
-    "ageLimitUG": 27,
-    "ageLimitPG": 39,
+    "ageLimit": 39,
     "gapYearsAccepted": 5,
-    "acceptedUgQuals": ["A/L (3 Passes)", "A/L (High Grades)"],
-    "acceptedPgQuals": ["3-Year Degree", "4-Year Degree", "High GPA Degree"],
+    "acceptedOlQuals": [
+      "Pass",
+      "Fail"
+    ],
+    "acceptedAlQuals": [
+      "3S",
+      "3C",
+      "3B"
+    ],
+    "acceptedDegreeStatus": [
+      "Completed",
+      "Pending"
+    ],
+    "acceptedGpa": [
+      "2.0",
+      "2.5",
+      "3.0"
+    ],
+    "acceptedDegreeClass": [
+      "Second Class Lower",
+      "Second Class Upper",
+      "First Class"
+    ],
     "englishRequirement": "Skype interview or IELTS 5.5",
     "bankProofAndCost": "€5,000–€6,000 funds proof",
     "hookScript": "Lithuania has very affordable tuition and living costs. Since your gap is within the limit, you have a strong chance. Let's start the application tomorrow."
@@ -50,11 +130,31 @@
   {
     "id": "germany",
     "name": "Germany",
-    "ageLimitUG": 25,
-    "ageLimitPG": 34,
+    "ageLimit": 34,
     "gapYearsAccepted": 4,
-    "acceptedUgQuals": ["A/L (3 Passes)", "A/L (High Grades)", "Foundation"],
-    "acceptedPgQuals": ["4-Year Degree", "High GPA Degree"],
+    "acceptedOlQuals": [
+      "Pass",
+      "Fail"
+    ],
+    "acceptedAlQuals": [
+      "3S",
+      "3C",
+      "3B"
+    ],
+    "acceptedDegreeStatus": [
+      "Completed",
+      "Pending"
+    ],
+    "acceptedGpa": [
+      "2.0",
+      "2.5",
+      "3.0"
+    ],
+    "acceptedDegreeClass": [
+      "Second Class Lower",
+      "Second Class Upper",
+      "First Class"
+    ],
     "englishRequirement": "IELTS 6.0",
     "bankProofAndCost": "Blocked account (€11,904)",
     "hookScript": "Germany offers free or extremely low tuition, but the process takes time. We need to open your blocked account ASAP. Bring your academic records to our office."
@@ -62,11 +162,31 @@
   {
     "id": "uk",
     "name": "United Kingdom",
-    "ageLimitUG": 24,
-    "ageLimitPG": 37,
+    "ageLimit": 37,
     "gapYearsAccepted": 5,
-    "acceptedUgQuals": ["A/L (2 Passes)", "A/L (3 Passes)", "A/L (High Grades)", "Foundation"],
-    "acceptedPgQuals": ["3-Year Degree", "4-Year Degree", "High GPA Degree"],
+    "acceptedOlQuals": [
+      "Pass",
+      "Fail"
+    ],
+    "acceptedAlQuals": [
+      "3S",
+      "3C",
+      "3B"
+    ],
+    "acceptedDegreeStatus": [
+      "Completed",
+      "Pending"
+    ],
+    "acceptedGpa": [
+      "2.0",
+      "2.5",
+      "3.0"
+    ],
+    "acceptedDegreeClass": [
+      "Second Class Lower",
+      "Second Class Upper",
+      "First Class"
+    ],
     "englishRequirement": "O/L English Credit ('C' or 'B')",
     "bankProofAndCost": "28-Day Rule: Tuition + £10,230",
     "hookScript": "The UK is highly competitive right now. Because you have the O/L English credit, you don't even need IELTS. Let's get your CAS process started tomorrow."
@@ -74,11 +194,31 @@
   {
     "id": "ireland",
     "name": "Ireland",
-    "ageLimitUG": 23,
-    "ageLimitPG": 34,
+    "ageLimit": 34,
     "gapYearsAccepted": 3,
-    "acceptedUgQuals": ["A/L (High Grades)"],
-    "acceptedPgQuals": ["High GPA Degree"],
+    "acceptedOlQuals": [
+      "Pass",
+      "Fail"
+    ],
+    "acceptedAlQuals": [
+      "3S",
+      "3C",
+      "3B"
+    ],
+    "acceptedDegreeStatus": [
+      "Completed",
+      "Pending"
+    ],
+    "acceptedGpa": [
+      "2.0",
+      "2.5",
+      "3.0"
+    ],
+    "acceptedDegreeClass": [
+      "Second Class Lower",
+      "Second Class Upper",
+      "First Class"
+    ],
     "englishRequirement": "Strictly IELTS 6.5",
     "bankProofAndCost": "€10,000 6-month clear banking",
     "hookScript": "Ireland is the tech hub of Europe with amazing post-study work rights. Since you meet their strict requirements, we should lock in your seat immediately."
@@ -86,11 +226,31 @@
   {
     "id": "cyprus",
     "name": "Cyprus",
-    "ageLimitUG": 31,
-    "ageLimitPG": 39,
+    "ageLimit": 39,
     "gapYearsAccepted": 7,
-    "acceptedUgQuals": ["O/L Only", "A/L (2 Passes)", "A/L (3 Passes)", "A/L (High Grades)", "Foundation"],
-    "acceptedPgQuals": ["3-Year Degree", "4-Year Degree", "High GPA Degree"],
+    "acceptedOlQuals": [
+      "Pass",
+      "Fail"
+    ],
+    "acceptedAlQuals": [
+      "3S",
+      "3C",
+      "3B"
+    ],
+    "acceptedDegreeStatus": [
+      "Completed",
+      "Pending"
+    ],
+    "acceptedGpa": [
+      "2.0",
+      "2.5",
+      "3.0"
+    ],
+    "acceptedDegreeClass": [
+      "Second Class Lower",
+      "Second Class Upper",
+      "First Class"
+    ],
     "englishRequirement": "Direct internal college test",
     "bankProofAndCost": "€5,000–€7,000 funds verification",
     "hookScript": "Cyprus is a fantastic entry point into Europe with high acceptance rates. We can do direct admission with an internal test. Can you come in for an initial chat?"
@@ -98,11 +258,31 @@
   {
     "id": "malaysia",
     "name": "Malaysia",
-    "ageLimitUG": 40,
-    "ageLimitPG": 40,
+    "ageLimit": 40,
     "gapYearsAccepted": 15,
-    "acceptedUgQuals": ["O/L Only", "A/L (2 Passes)", "A/L (3 Passes)", "A/L (High Grades)", "Foundation"],
-    "acceptedPgQuals": ["3-Year Degree", "4-Year Degree", "High GPA Degree"],
+    "acceptedOlQuals": [
+      "Pass",
+      "Fail"
+    ],
+    "acceptedAlQuals": [
+      "3S",
+      "3C",
+      "3B"
+    ],
+    "acceptedDegreeStatus": [
+      "Completed",
+      "Pending"
+    ],
+    "acceptedGpa": [
+      "2.0",
+      "2.5",
+      "3.0"
+    ],
+    "acceptedDegreeClass": [
+      "Second Class Lower",
+      "Second Class Upper",
+      "First Class"
+    ],
     "englishRequirement": "Internal placement",
     "bankProofAndCost": "LKR 3–4 Million bank guarantee",
     "hookScript": "Malaysia offers a world-class education very close to home at a fraction of the cost. The intake is filling up fast. Let's submit your passport copy tomorrow."
@@ -110,11 +290,31 @@
   {
     "id": "dubai",
     "name": "Dubai (UAE)",
-    "ageLimitUG": 55,
-    "ageLimitPG": 55,
+    "ageLimit": 55,
     "gapYearsAccepted": 20,
-    "acceptedUgQuals": ["O/L Only", "A/L (2 Passes)", "A/L (3 Passes)", "A/L (High Grades)", "Foundation"],
-    "acceptedPgQuals": ["Diploma", "3-Year Degree", "4-Year Degree", "High GPA Degree"],
+    "acceptedOlQuals": [
+      "Pass",
+      "Fail"
+    ],
+    "acceptedAlQuals": [
+      "3S",
+      "3C",
+      "3B"
+    ],
+    "acceptedDegreeStatus": [
+      "Completed",
+      "Pending"
+    ],
+    "acceptedGpa": [
+      "2.0",
+      "2.5",
+      "3.0"
+    ],
+    "acceptedDegreeClass": [
+      "Second Class Lower",
+      "Second Class Upper",
+      "First Class"
+    ],
     "englishRequirement": "No IELTS mandatory",
     "bankProofAndCost": "Visa issued via university sponsor",
     "hookScript": "Dubai has the lowest scrutiny and almost guaranteed visa via university sponsorship. If you are looking for an immediate start, this is it. Let's meet."
