@@ -22,9 +22,8 @@ export function CountryCard({ country, onSelect }: CountryCardProps) {
               <Clock className="w-4 h-4 text-gray-500" />
             </div>
             <div className="pt-1.5">
-              <p className="text-gray-900 font-medium leading-none mb-1">Age & Gap</p>
-              <p className="text-gray-500 text-xs">Age &lt; {country.ageLimit}</p>
-              <p className="text-gray-500 text-xs">Max Gap: {country.gapYearsAccepted} yrs</p>
+              <p className="text-gray-900 font-medium leading-none mb-1">Age Limit</p>
+              <p className="text-gray-500 text-xs">Max Age: {country.ageLimit}</p>
             </div>
           </div>
           

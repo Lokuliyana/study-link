@@ -50,12 +50,12 @@ export function KanbanBoard() {
     const leadToUpdate = leads.find(l => l.id === leadId);
     if (!leadToUpdate) return;
 
-    const updatedLead = { 
-      ...leadToUpdate, 
+    const updatedLead = {
+      ...leadToUpdate,
       stage: newStage as PipelineStage,
       needsFollowUp: needsFollowUp !== undefined ? needsFollowUp : leadToUpdate.needsFollowUp
     };
-    
+
     setLeads(leads.map(l => l.id === leadId ? updatedLead : l));
 
     try {
@@ -63,6 +63,19 @@ export function KanbanBoard() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedLead),
+      });
+    } catch (error) {
+      fetchLeads();
+    }
+  };
+
+  const handleDeleteLead = async (leadId: string) => {
+    setLeads(prev => prev.filter(l => l.id !== leadId));
+    try {
+      await fetch('/api/leads', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: leadId }),
       });
     } catch (error) {
       fetchLeads();
@@ -176,10 +189,11 @@ export function KanbanBoard() {
                   ) : (
                     <div className="space-y-3">
                       {stageLeads.map(lead => (
-                        <LeadCard 
-                          key={lead.id} 
-                          lead={lead} 
+                        <LeadCard
+                          key={lead.id}
+                          lead={lead}
                           onStageChange={handleStageChange}
+                          onDelete={handleDeleteLead}
                         />
                       ))}
                     </div>
@@ -194,19 +208,19 @@ export function KanbanBoard() {
           {activeTab === 'Action Needed' && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {actionNeededLeads.length === 0 && <p className="text-gray-400 p-4">No leads require immediate action.</p>}
-              {actionNeededLeads.map(lead => <LeadCard key={lead.id} lead={lead} onStageChange={handleStageChange} />)}
+              {actionNeededLeads.map(lead => <LeadCard key={lead.id} lead={lead} onStageChange={handleStageChange} onDelete={handleDeleteLead} />)}
             </div>
           )}
           {activeTab === 'Appointments' && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {appointmentLeads.length === 0 && <p className="text-gray-400 p-4">No upcoming appointments set.</p>}
-              {appointmentLeads.map(lead => <LeadCard key={lead.id} lead={lead} onStageChange={handleStageChange} />)}
+              {appointmentLeads.map(lead => <LeadCard key={lead.id} lead={lead} onStageChange={handleStageChange} onDelete={handleDeleteLead} />)}
             </div>
           )}
           {activeTab === 'Call Later' && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {followUpLeads.length === 0 && <p className="text-gray-400 p-4">No leads marked for follow-up.</p>}
-              {followUpLeads.map(lead => <LeadCard key={lead.id} lead={lead} onStageChange={handleStageChange} />)}
+              {followUpLeads.map(lead => <LeadCard key={lead.id} lead={lead} onStageChange={handleStageChange} onDelete={handleDeleteLead} />)}
             </div>
           )}
         </div>

@@ -50,3 +50,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Failed to save lead' }, { status: 500 });
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    const { id } = await request.json();
+    const { deleteDoc, doc: firestoreDoc } = await import('firebase/firestore');
+    await deleteDoc(firestoreDoc(db, 'leads', id));
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Firebase Leads DELETE Error:', error);
+    return NextResponse.json({ error: 'Failed to delete lead' }, { status: 500 });
+  }
+}

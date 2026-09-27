@@ -1,12 +1,13 @@
 import { Lead } from '@/lib/types';
-import { MessageSquare, Calendar, Globe, Clock } from 'lucide-react';
+import { MessageSquare, Calendar, Globe, Clock, Trash2 } from 'lucide-react';
 
 interface LeadCardProps {
   lead: Lead;
   onStageChange: (leadId: string, newStage: string, needsFollowUp?: boolean) => void;
+  onDelete?: (leadId: string) => void;
 }
 
-export function LeadCard({ lead, onStageChange }: LeadCardProps) {
+export function LeadCard({ lead, onStageChange, onDelete }: LeadCardProps) {
   const handleWhatsApp = () => {
     const cleanPhone = lead.phone.replace(/[^0-9]/g, '');
     const url = `https://wa.me/${cleanPhone}?text=Hi ${lead.name}, this is Study Link regarding your application for ${lead.matchedCountry || 'studies abroad'}. Please bring your certificates to our Nugegoda office.`;
@@ -21,27 +22,35 @@ export function LeadCard({ lead, onStageChange }: LeadCardProps) {
           <p className="text-xs text-gray-500 mt-0.5">{lead.phone}</p>
         </div>
         <div className="flex items-center gap-1">
-          <button 
+          <button
             onClick={() => {
               const updatedLead = { ...lead, needsFollowUp: !lead.needsFollowUp };
-              // We dispatch to the parent to handle the API call
               onStageChange(lead.id, lead.stage, updatedLead.needsFollowUp);
             }}
-            className={`p-2 rounded-full transition-colors border ${lead.needsFollowUp ? 'text-amber-600 bg-amber-50 border-amber-200' : 'text-gray-400 bg-gray-50 border-gray-100 hover:bg-gray-100'}`}
+            className={`p-1.5 rounded-full transition-colors border ${lead.needsFollowUp ? 'text-amber-600 bg-amber-50 border-amber-200' : 'text-gray-400 bg-gray-50 border-gray-100 hover:bg-gray-100'}`}
             title="Mark for Follow Up"
           >
-            <Clock className="w-4 h-4" />
+            <Clock className="w-3.5 h-3.5" />
           </button>
-          <button 
+          <button
             onClick={handleWhatsApp}
-            className="text-green-600 bg-green-50 hover:bg-green-100 p-2 rounded-full transition-colors border border-green-100/50"
+            className="text-green-600 bg-green-50 hover:bg-green-100 p-1.5 rounded-full transition-colors border border-green-100/50"
             title="1-Click WhatsApp"
           >
-            <MessageSquare className="w-4 h-4" />
+            <MessageSquare className="w-3.5 h-3.5" />
           </button>
+          {onDelete && (
+            <button
+              onClick={() => onDelete(lead.id)}
+              className="text-red-400 bg-red-50 hover:bg-red-100 p-1.5 rounded-full transition-colors border border-red-100/50"
+              title="Delete Lead"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
       </div>
-      
+
       <div className="flex flex-wrap items-center gap-2 mb-4">
         {lead.matchedCountry && (
           <span className="inline-flex items-center gap-1 text-[11px] font-medium text-blue-700 bg-blue-50 px-2 py-1 rounded-md border border-blue-100/50">
@@ -52,7 +61,7 @@ export function LeadCard({ lead, onStageChange }: LeadCardProps) {
         {lead.appointmentDate && (
           <span className="inline-flex items-center gap-1 text-[11px] font-medium text-purple-700 bg-purple-50 px-2 py-1 rounded-md border border-purple-100/50">
             <Calendar className="w-3 h-3" />
-            {lead.appointmentDate} {lead.appointmentTime || ''}
+            {lead.appointmentDate}{lead.appointmentTime ? ` @ ${lead.appointmentTime}` : ''}
           </span>
         )}
       </div>
