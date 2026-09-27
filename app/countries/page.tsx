@@ -128,32 +128,26 @@ export default function CountriesMatrixPage() {
     rule.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const renderQuals = (
-    rule: CountryRule,
-    field: string,
-    options: string[],
-    title: string,
-    activeBg: string
-  ) => {
-    const values = (rule[field as keyof CountryRule] as string[]) || [];
+  const renderQuals = (rule: CountryRule, field: keyof CountryRule, options: string[], title: string, activeBg: string) => {
+    const values = (rule[field] as string[]) || [];
     return (
-      <div className="mb-4">
-        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{title}</p>
-        <div className="flex flex-wrap gap-1.5">
+      <div className="mb-5 last:mb-0">
+        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-2.5">{title}</p>
+        <div className="flex flex-wrap gap-2">
           {options.map(opt => {
             const isAccepted = values.includes(opt);
             return isEditing ? (
               <button
                 key={opt}
                 onClick={() => toggleQual(rule.id, field, opt)}
-                className={`px-2 py-1 rounded text-xs font-medium border transition-colors flex items-center gap-1 ${isAccepted ? activeBg : 'bg-white border-gray-200 text-gray-400 hover:bg-gray-50'}`}
+                className={`px-3 py-1.5 rounded-full text-[11px] font-medium border transition-all flex items-center gap-1.5 ${isAccepted ? activeBg : 'bg-gray-50 border-gray-200 text-gray-500 hover:bg-gray-100 hover:border-gray-300'}`}
               >
-                {isAccepted && <Check className="w-3 h-3" />}
+                {isAccepted && <Check className="w-3.5 h-3.5" />}
                 {opt}
               </button>
             ) : (
               isAccepted && (
-                <span key={opt} className={`text-[11px] px-2 py-0.5 rounded font-medium border ${activeBg}`}>
+                <span key={opt} className={`text-[11px] px-3 py-1 rounded-full font-medium border shadow-sm ${activeBg}`}>
                   {opt}
                 </span>
               )
@@ -232,7 +226,7 @@ export default function CountriesMatrixPage() {
       {/* Add Custom Field Form */}
       {showAddField && (
         <div className="mb-6 bg-purple-50 border border-purple-100 rounded-2xl p-5">
-          <h3 className="font-semibold text-purple-900 mb-3 flex items-center gap-2">
+          <h3 className="font-semibold text-purple-900 mb-4 flex items-center gap-2">
             <Plus className="w-4 h-4" /> Define a New Filter Attribute
           </h3>
           <div className="flex flex-wrap gap-3">
@@ -241,19 +235,19 @@ export default function CountriesMatrixPage() {
               placeholder="Field label (e.g. Work Experience)"
               value={newFieldLabel}
               onChange={e => setNewFieldLabel(e.target.value)}
-              className="flex-1 min-w-[180px] border border-purple-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+              className="flex-1 min-w-[180px] bg-white border border-purple-100 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 transition-all shadow-sm"
             />
             <input
               type="text"
               placeholder="Options comma-separated (e.g. None, 1-2 yrs, 3+ yrs)"
               value={newFieldOptions}
               onChange={e => setNewFieldOptions(e.target.value)}
-              className="flex-1 min-w-[240px] border border-purple-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+              className="flex-1 min-w-[240px] bg-white border border-purple-100 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 transition-all shadow-sm"
             />
-            <button onClick={handleAddCustomField} className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors">
-              Add
+            <button onClick={handleAddCustomField} className="bg-purple-600 shadow-md shadow-purple-600/20 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-purple-700 transition-all active:scale-95">
+              Add Field
             </button>
-            <button onClick={() => setShowAddField(false)} className="text-gray-500 hover:bg-gray-100 px-3 py-2 rounded-lg text-sm transition-colors">
+            <button onClick={() => setShowAddField(false)} className="text-gray-500 bg-white border border-gray-200 hover:bg-gray-50 px-5 py-2 rounded-full text-sm font-medium transition-all">
               Cancel
             </button>
           </div>
@@ -273,85 +267,85 @@ export default function CountriesMatrixPage() {
       )}
 
       {/* Matrix Table */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto pb-10">
         <div className="inline-block min-w-full align-middle">
-          <div className="border border-gray-200 rounded-2xl overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200 text-sm">
-              <thead className="bg-gray-50/80">
+          <div className="border border-gray-100 rounded-[32px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+            <table className="min-w-full divide-y divide-gray-100 text-sm">
+              <thead className="bg-[#F8F8F7]">
                 <tr>
-                  <th scope="col" className="px-6 py-4 text-left font-semibold text-gray-900 w-48">Country & Age</th>
-                  <th scope="col" className="px-6 py-4 text-left font-semibold text-gray-900">Accepted Qualifications</th>
-                  <th scope="col" className="px-6 py-4 text-left font-semibold text-gray-900 w-1/4">Hook Script</th>
+                  <th scope="col" className="px-8 py-5 text-left text-[11px] font-bold text-gray-400 uppercase tracking-widest w-64">Country & Constraints</th>
+                  <th scope="col" className="px-8 py-5 text-left text-[11px] font-bold text-gray-400 uppercase tracking-widest">Accepted Qualifications</th>
+                  <th scope="col" className="px-8 py-5 text-left text-[11px] font-bold text-gray-400 uppercase tracking-widest w-1/4">Counselor Pitch</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-100">
+              <tbody className="bg-white divide-y divide-gray-100/60">
                 {filteredRules.map((rule) => (
-                  <tr key={rule.id} className="hover:bg-gray-50/50 transition-colors align-top">
+                  <tr key={rule.id} className="hover:bg-[#FDFDFD] transition-colors align-top">
                     {/* Country & Age */}
-                    <td className="px-6 py-5 align-top">
+                    <td className="px-8 py-6 align-top">
                       {isEditing ? (
-                        <div className="space-y-2">
+                        <div className="space-y-3">
                           <div className="flex items-center gap-2">
                             <input
                               type="text"
                               value={rule.name ?? ''}
                               onChange={(e) => updateRule(rule.id, 'name', e.target.value)}
-                              className="font-bold text-gray-900 border rounded px-2 py-1 w-full text-sm"
+                              className="font-bold text-gray-900 border border-gray-200 bg-gray-50 focus:bg-white rounded-xl px-3 py-2 w-full text-base focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none transition-all shadow-sm"
                             />
-                            <button onClick={() => handleDeleteCountry(rule.id)} className="text-red-400 hover:text-red-600 p-1 shrink-0">
+                            <button onClick={() => handleDeleteCountry(rule.id)} className="text-red-400 hover:text-red-600 bg-red-50 hover:bg-red-100 p-2.5 rounded-full shrink-0 transition-colors">
                               <Trash2 className="w-4 h-4" />
                             </button>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs text-gray-600">UG Max Age</span>
+                          <div className="flex items-center justify-between gap-3 bg-gray-50/50 p-2 rounded-xl border border-gray-100">
+                            <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">UG Max Age</span>
                             <input
                               type="number"
                               value={rule.ageLimitUG ?? 30}
                               onChange={(e) => updateRule(rule.id, 'ageLimitUG', parseInt(e.target.value) || 30)}
-                              className="w-16 border rounded px-1.5 py-1 text-xs"
+                              className="w-16 bg-white border border-gray-200 rounded-lg px-2 py-1.5 text-sm font-medium focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20 transition-all text-center"
                             />
                           </div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs text-gray-600">PG Max Age</span>
+                          <div className="flex items-center justify-between gap-3 bg-gray-50/50 p-2 rounded-xl border border-gray-100">
+                            <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">PG Max Age</span>
                             <input
                               type="number"
                               value={rule.ageLimitPG ?? 40}
                               onChange={(e) => updateRule(rule.id, 'ageLimitPG', parseInt(e.target.value) || 40)}
-                              className="w-16 border rounded px-1.5 py-1 text-xs"
+                              className="w-16 bg-white border border-gray-200 rounded-lg px-2 py-1.5 text-sm font-medium focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 transition-all text-center"
                             />
                           </div>
-                          <div className="space-y-1">
-                            <span className="text-xs text-gray-600">English Req</span>
+                          <div className="space-y-1.5 pt-1">
+                            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest pl-1">English Req</span>
                             <input
                               type="text"
                               value={rule.englishRequirement ?? ''}
                               onChange={(e) => updateRule(rule.id, 'englishRequirement', e.target.value)}
-                              className="w-full border rounded px-2 py-1 text-xs"
+                              className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-500/20 transition-all"
                             />
                           </div>
-                          <div className="space-y-1">
-                            <span className="text-xs text-gray-600">Funds / Bank Proof</span>
+                          <div className="space-y-1.5 pt-1">
+                            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest pl-1">Funds / Bank Proof</span>
                             <input
                               type="text"
                               value={rule.bankProofAndCost ?? ''}
                               onChange={(e) => updateRule(rule.id, 'bankProofAndCost', e.target.value)}
-                              className="w-full border rounded px-2 py-1 text-xs"
+                              className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20 transition-all"
                             />
                           </div>
                         </div>
                       ) : (
                         <div>
-                          <div className="font-bold text-gray-900 text-base mb-2">{rule.name}</div>
-                          <div className="flex flex-col gap-1.5">
-                            <div className="flex gap-1.5">
-                              <span className="bg-blue-50 text-blue-700 border border-blue-100 text-xs px-2 py-0.5 rounded font-medium">UG &lt; {rule.ageLimitUG}</span>
-                              <span className="bg-purple-50 text-purple-700 border border-purple-100 text-xs px-2 py-0.5 rounded font-medium">PG &lt; {rule.ageLimitPG}</span>
+                          <div className="font-bold text-gray-900 text-lg mb-3">{rule.name}</div>
+                          <div className="flex flex-col gap-2">
+                            <div className="flex gap-2">
+                              <span className="bg-blue-50/80 text-blue-700 border border-blue-100 text-[11px] px-2.5 py-1 rounded-md font-semibold tracking-wide">UG &lt; {rule.ageLimitUG}</span>
+                              <span className="bg-purple-50/80 text-purple-700 border border-purple-100 text-[11px] px-2.5 py-1 rounded-md font-semibold tracking-wide">PG &lt; {rule.ageLimitPG}</span>
                             </div>
                             {rule.englishRequirement && (
-                              <span className="bg-green-50 border border-green-100 text-green-700 text-[11px] px-2 py-0.5 rounded w-fit">{rule.englishRequirement}</span>
+                              <span className="bg-green-50/80 border border-green-100 text-green-800 text-[11px] px-2.5 py-1 rounded-md w-fit font-medium">En: {rule.englishRequirement}</span>
                             )}
                             {rule.bankProofAndCost && (
-                              <span className="bg-blue-50 border border-blue-100 text-blue-700 text-[11px] px-2 py-0.5 rounded w-fit">{rule.bankProofAndCost}</span>
+                              <span className="bg-slate-50/80 border border-slate-200 text-slate-700 text-[11px] px-2.5 py-1 rounded-md w-fit font-medium">Funds: {rule.bankProofAndCost}</span>
                             )}
                           </div>
                         </div>
@@ -359,7 +353,7 @@ export default function CountriesMatrixPage() {
                     </td>
 
                     {/* Qualifications */}
-                    <td className="px-6 py-5 align-top">
+                    <td className="px-8 py-6 align-top border-l border-gray-50/50">
                       <div>
                         {renderQuals(rule, 'acceptedOlQuals', OL_OPTIONS, 'O/L Status', 'bg-blue-50 border-blue-200 text-blue-700')}
                         {renderQuals(rule, 'acceptedAlQuals', AL_OPTIONS, 'A/L Result', 'bg-indigo-50 border-indigo-200 text-indigo-700')}
@@ -371,23 +365,23 @@ export default function CountriesMatrixPage() {
                         {customFields.map(cf => {
                           const values = rule.customValues?.[cf.key] || [];
                           return (
-                            <div key={cf.key} className="mb-4">
-                              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{cf.label}</p>
-                              <div className="flex flex-wrap gap-1.5">
+                            <div key={cf.key} className="mb-5 last:mb-0">
+                              <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-2.5">{cf.label}</p>
+                              <div className="flex flex-wrap gap-2">
                                 {cf.options.map(opt => {
                                   const isAccepted = values.includes(opt);
                                   return isEditing ? (
                                     <button
                                       key={opt}
                                       onClick={() => toggleCustomQual(rule.id, cf.key, opt)}
-                                      className={`px-2 py-1 rounded text-xs font-medium border transition-colors flex items-center gap-1 ${isAccepted ? 'bg-amber-50 border-amber-200 text-amber-700' : 'bg-white border-gray-200 text-gray-400 hover:bg-gray-50'}`}
+                                      className={`px-3 py-1.5 rounded-full text-[11px] font-medium border transition-all flex items-center gap-1.5 ${isAccepted ? 'bg-amber-50 border-amber-200 text-amber-700 shadow-sm' : 'bg-gray-50 border-gray-200 text-gray-500 hover:bg-gray-100 hover:border-gray-300'}`}
                                     >
-                                      {isAccepted && <Check className="w-3 h-3" />}
+                                      {isAccepted && <Check className="w-3.5 h-3.5" />}
                                       {opt}
                                     </button>
                                   ) : (
                                     isAccepted && (
-                                      <span key={opt} className="text-[11px] px-2 py-0.5 rounded font-medium border bg-amber-50 border-amber-200 text-amber-700">
+                                      <span key={opt} className="text-[11px] px-3 py-1 rounded-full font-medium border bg-amber-50 border-amber-200 text-amber-700 shadow-sm">
                                         {opt}
                                       </span>
                                     )
@@ -404,18 +398,18 @@ export default function CountriesMatrixPage() {
                     </td>
 
                     {/* Hook Script */}
-                    <td className="px-6 py-5 align-top">
+                    <td className="px-8 py-6 align-top border-l border-gray-50/50">
                       {isEditing ? (
                         <textarea
                           value={rule.hookScript ?? ''}
                           onChange={(e) => updateRule(rule.id, 'hookScript', e.target.value)}
-                          className="w-full h-32 text-sm border border-blue-300 bg-blue-50/30 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none resize-none"
+                          className="w-full h-32 text-sm border border-blue-200 bg-blue-50/50 rounded-2xl p-4 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none resize-none transition-all shadow-inner"
                           placeholder="Enter counselor pitch script..."
                         />
                       ) : (
-                        <div className="bg-blue-50/50 border border-blue-100 rounded-xl p-3 relative group">
-                          <Info className="w-4 h-4 text-blue-400 absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                          <p className="text-blue-900 text-sm italic leading-relaxed pr-6">
+                        <div className="bg-gradient-to-br from-blue-50/80 to-blue-50/30 border border-blue-100/80 rounded-2xl p-4 relative group shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+                          <Info className="w-4 h-4 text-blue-400 absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <p className="text-blue-900/90 text-[13px] italic leading-relaxed pr-6 font-medium">
                             "{rule.hookScript}"
                           </p>
                         </div>
