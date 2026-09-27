@@ -2,321 +2,166 @@
   {
     "id": "latvia",
     "name": "Latvia",
-    "ageLimit": 44,
-    "gapYearsAccepted": 8,
-    "acceptedOlQuals": [
-      "Pass",
-      "Fail"
-    ],
-    "acceptedAlQuals": [
-      "3S",
-      "3C",
-      "3B"
-    ],
-    "acceptedDegreeStatus": [
-      "Completed",
-      "Pending"
-    ],
-    "acceptedGpa": [
-      "2.0",
-      "2.5",
-      "3.0"
-    ],
-    "acceptedDegreeClass": [
-      "Second Class Lower",
-      "Second Class Upper",
-      "First Class"
-    ],
-    "englishRequirement": "Duolingo 100+, IELTS 6.0, or Skype",
-    "bankProofAndCost": "~€7,200 living deposit",
-    "hookScript": "Latvia offers an incredibly fast processing time. If you bring your certificates to our Nugegoda office tomorrow, we can secure your offer letter this week."
+    "ageLimitUG": 30,
+    "ageLimitPG": 45,
+    "acceptedOlQuals": [],
+    "acceptedAlQuals": ["3C", "3B"],
+    "acceptedDegreeStatus": ["Completed", "Pending"],
+    "acceptedGpa": ["2.5", "3.0"],
+    "acceptedDegreeClass": ["Second Class Lower", "Second Class Upper", "First Class"],
+    "englishRequirement": "Duolingo 100+ / IELTS 6.0 (UG) | Degree in English OR Duolingo 110+ / IELTS 6.5 (PG)",
+    "bankProofAndCost": "~€7,200 living deposit | Budget: 20-22 Lakhs",
+    "hookScript": "Latvia is one of the most affordable Schengen destinations — only 20-22 lakhs all inclusive. The process can be completed entirely from Sri Lanka. You get Part-Time work rights (20hrs/wk) and a Schengen visa, which means you can travel to Switzerland, Germany, and Italy freely. Intakes are February and September. Shall we book a slot at our Nugegoda office this week to begin your file?",
+    "customValues": {}
   },
   {
     "id": "malta",
     "name": "Malta",
-    "ageLimit": 40,
-    "gapYearsAccepted": 10,
-    "acceptedOlQuals": [
-      "Pass",
-      "Fail"
-    ],
-    "acceptedAlQuals": [
-      "3S",
-      "3C",
-      "3B"
-    ],
-    "acceptedDegreeStatus": [
-      "Completed",
-      "Pending"
-    ],
-    "acceptedGpa": [
-      "2.0",
-      "2.5",
-      "3.0"
-    ],
-    "acceptedDegreeClass": [
-      "Second Class Lower",
-      "Second Class Upper",
-      "First Class"
-    ],
-    "englishRequirement": "Internal test OK",
-    "bankProofAndCost": "€9,000–€10,000 bank statement",
-    "hookScript": "Malta has the most lenient gap year policies in Europe. To take advantage of the upcoming intake, we need to apply immediately. Can you visit us tomorrow?"
+    "ageLimitUG": 40,
+    "ageLimitPG": 40,
+    "acceptedOlQuals": ["Pass"],
+    "acceptedAlQuals": ["3S", "3C", "3B"],
+    "acceptedDegreeStatus": ["Completed"],
+    "acceptedGpa": ["2.0", "2.5", "3.0"],
+    "acceptedDegreeClass": ["Second Class Lower", "Second Class Upper", "First Class"],
+    "englishRequirement": "IELTS 6.0 (fee waiver) | IELTS 6.5 (full fee waiver)",
+    "bankProofAndCost": "~35 Lakhs | Jan / Apr / Oct Intakes",
+    "hookScript": "Malta is a Schengen island country right next to Italy — incredibly affordable living and a very tourist-friendly environment. With just O/Ls you can enter a Level 5 diploma, and with A/Ls you can go straight to a degree. The age limit goes up to 40, so there's still a great window for you. Special offer: the 2027 February intake has an application fee waiver. Do you have time to come to our office this week?",
+    "customValues": {}
+  },
+  {
+    "id": "russia",
+    "name": "Russia",
+    "ageLimitUG": 32,
+    "ageLimitPG": 40,
+    "acceptedOlQuals": ["Pass", "Fail"],
+    "acceptedAlQuals": ["3S", "3C", "3B", "None"],
+    "acceptedDegreeStatus": ["Completed", "Pending", "Haven't done at all"],
+    "acceptedGpa": [],
+    "acceptedDegreeClass": [],
+    "englishRequirement": "Not required — medium of instruction is available in English",
+    "bankProofAndCost": "10-12 Lakhs (~USD 3,500) | 100% visa success rate",
+    "hookScript": "Russia is the most budget-friendly option we offer — only 10 to 12 lakhs for the entire program. There is almost zero chance of visa rejection and no English test required. Even if you have only sat for your O/Ls, you are eligible. This is ideal if you want to start your international education journey with minimal financial risk. Can we set up a meeting this week?",
+    "customValues": {}
   },
   {
     "id": "finland",
     "name": "Finland",
-    "ageLimit": 45,
-    "gapYearsAccepted": 15,
-    "acceptedOlQuals": [
-      "Pass",
-      "Fail"
-    ],
-    "acceptedAlQuals": [
-      "3S",
-      "3C",
-      "3B"
-    ],
-    "acceptedDegreeStatus": [
-      "Completed",
-      "Pending"
-    ],
-    "acceptedGpa": [
-      "2.0",
-      "2.5",
-      "3.0"
-    ],
-    "acceptedDegreeClass": [
-      "Second Class Lower",
-      "Second Class Upper",
-      "First Class"
-    ],
+    "ageLimitUG": 45,
+    "ageLimitPG": 45,
+    "acceptedOlQuals": [],
+    "acceptedAlQuals": ["3C", "3B"],
+    "acceptedDegreeStatus": ["Completed"],
+    "acceptedGpa": ["2.5", "3.0"],
+    "acceptedDegreeClass": ["Second Class Lower", "Second Class Upper", "First Class"],
     "englishRequirement": "UAS entrance exam; IELTS 6.0",
     "bankProofAndCost": "€6,720/year personal account",
-    "hookScript": "Finland is one of the happiest countries with high visa success. Deadlines close soon. Please bring your documents so we can start the entrance exam prep."
+    "hookScript": "Finland is one of the happiest countries in the world with high visa success rates. Deadlines close soon. Please bring your documents so we can start the entrance exam prep.",
+    "customValues": {}
   },
   {
     "id": "lithuania",
     "name": "Lithuania",
-    "ageLimit": 39,
-    "gapYearsAccepted": 5,
-    "acceptedOlQuals": [
-      "Pass",
-      "Fail"
-    ],
-    "acceptedAlQuals": [
-      "3S",
-      "3C",
-      "3B"
-    ],
-    "acceptedDegreeStatus": [
-      "Completed",
-      "Pending"
-    ],
-    "acceptedGpa": [
-      "2.0",
-      "2.5",
-      "3.0"
-    ],
-    "acceptedDegreeClass": [
-      "Second Class Lower",
-      "Second Class Upper",
-      "First Class"
-    ],
+    "ageLimitUG": 27,
+    "ageLimitPG": 39,
+    "acceptedOlQuals": [],
+    "acceptedAlQuals": ["3C", "3B"],
+    "acceptedDegreeStatus": ["Completed", "Pending"],
+    "acceptedGpa": ["2.0", "2.5", "3.0"],
+    "acceptedDegreeClass": ["Second Class Lower", "Second Class Upper", "First Class"],
     "englishRequirement": "Skype interview or IELTS 5.5",
     "bankProofAndCost": "€5,000–€6,000 funds proof",
-    "hookScript": "Lithuania has very affordable tuition and living costs. Since your gap is within the limit, you have a strong chance. Let's start the application tomorrow."
+    "hookScript": "Lithuania has very affordable tuition and living costs. Since your qualifications match, you have a strong chance. Let's start the application tomorrow.",
+    "customValues": {}
   },
   {
     "id": "germany",
     "name": "Germany",
-    "ageLimit": 34,
-    "gapYearsAccepted": 4,
-    "acceptedOlQuals": [
-      "Pass",
-      "Fail"
-    ],
-    "acceptedAlQuals": [
-      "3S",
-      "3C",
-      "3B"
-    ],
-    "acceptedDegreeStatus": [
-      "Completed",
-      "Pending"
-    ],
-    "acceptedGpa": [
-      "2.0",
-      "2.5",
-      "3.0"
-    ],
-    "acceptedDegreeClass": [
-      "Second Class Lower",
-      "Second Class Upper",
-      "First Class"
-    ],
+    "ageLimitUG": 25,
+    "ageLimitPG": 34,
+    "acceptedOlQuals": [],
+    "acceptedAlQuals": ["3C", "3B"],
+    "acceptedDegreeStatus": ["Completed"],
+    "acceptedGpa": ["3.0"],
+    "acceptedDegreeClass": ["First Class"],
     "englishRequirement": "IELTS 6.0",
     "bankProofAndCost": "Blocked account (€11,904)",
-    "hookScript": "Germany offers free or extremely low tuition, but the process takes time. We need to open your blocked account ASAP. Bring your academic records to our office."
+    "hookScript": "Germany offers free or extremely low tuition, but the process takes time. We need to open your blocked account ASAP. Bring your academic records to our office.",
+    "customValues": {}
   },
   {
     "id": "uk",
     "name": "United Kingdom",
-    "ageLimit": 37,
-    "gapYearsAccepted": 5,
-    "acceptedOlQuals": [
-      "Pass",
-      "Fail"
-    ],
-    "acceptedAlQuals": [
-      "3S",
-      "3C",
-      "3B"
-    ],
-    "acceptedDegreeStatus": [
-      "Completed",
-      "Pending"
-    ],
-    "acceptedGpa": [
-      "2.0",
-      "2.5",
-      "3.0"
-    ],
-    "acceptedDegreeClass": [
-      "Second Class Lower",
-      "Second Class Upper",
-      "First Class"
-    ],
-    "englishRequirement": "O/L English Credit ('C' or 'B')",
+    "ageLimitUG": 24,
+    "ageLimitPG": 37,
+    "acceptedOlQuals": ["Pass"],
+    "acceptedAlQuals": ["3C", "3B"],
+    "acceptedDegreeStatus": ["Completed"],
+    "acceptedGpa": ["2.0", "2.5", "3.0"],
+    "acceptedDegreeClass": ["Second Class Lower", "Second Class Upper", "First Class"],
+    "englishRequirement": "O/L English Credit ('C' or 'B') — no IELTS needed",
     "bankProofAndCost": "28-Day Rule: Tuition + £10,230",
-    "hookScript": "The UK is highly competitive right now. Because you have the O/L English credit, you don't even need IELTS. Let's get your CAS process started tomorrow."
+    "hookScript": "The UK is highly competitive right now. Because you have the O/L English credit, you don't even need IELTS. Let's get your CAS process started tomorrow.",
+    "customValues": {}
   },
   {
     "id": "ireland",
     "name": "Ireland",
-    "ageLimit": 34,
-    "gapYearsAccepted": 3,
-    "acceptedOlQuals": [
-      "Pass",
-      "Fail"
-    ],
-    "acceptedAlQuals": [
-      "3S",
-      "3C",
-      "3B"
-    ],
-    "acceptedDegreeStatus": [
-      "Completed",
-      "Pending"
-    ],
-    "acceptedGpa": [
-      "2.0",
-      "2.5",
-      "3.0"
-    ],
-    "acceptedDegreeClass": [
-      "Second Class Lower",
-      "Second Class Upper",
-      "First Class"
-    ],
+    "ageLimitUG": 23,
+    "ageLimitPG": 34,
+    "acceptedOlQuals": ["Pass"],
+    "acceptedAlQuals": ["3B"],
+    "acceptedDegreeStatus": ["Completed"],
+    "acceptedGpa": ["3.0"],
+    "acceptedDegreeClass": ["Second Class Upper", "First Class"],
     "englishRequirement": "Strictly IELTS 6.5",
     "bankProofAndCost": "€10,000 6-month clear banking",
-    "hookScript": "Ireland is the tech hub of Europe with amazing post-study work rights. Since you meet their strict requirements, we should lock in your seat immediately."
+    "hookScript": "Ireland is the tech hub of Europe with amazing post-study work rights. Since you meet their strict requirements, we should lock in your seat immediately.",
+    "customValues": {}
   },
   {
     "id": "cyprus",
     "name": "Cyprus",
-    "ageLimit": 39,
-    "gapYearsAccepted": 7,
-    "acceptedOlQuals": [
-      "Pass",
-      "Fail"
-    ],
-    "acceptedAlQuals": [
-      "3S",
-      "3C",
-      "3B"
-    ],
-    "acceptedDegreeStatus": [
-      "Completed",
-      "Pending"
-    ],
-    "acceptedGpa": [
-      "2.0",
-      "2.5",
-      "3.0"
-    ],
-    "acceptedDegreeClass": [
-      "Second Class Lower",
-      "Second Class Upper",
-      "First Class"
-    ],
+    "ageLimitUG": 31,
+    "ageLimitPG": 39,
+    "acceptedOlQuals": ["Pass", "Fail"],
+    "acceptedAlQuals": ["3S", "3C", "3B"],
+    "acceptedDegreeStatus": ["Completed", "Pending"],
+    "acceptedGpa": ["2.0", "2.5", "3.0"],
+    "acceptedDegreeClass": ["Second Class Lower", "Second Class Upper", "First Class"],
     "englishRequirement": "Direct internal college test",
     "bankProofAndCost": "€5,000–€7,000 funds verification",
-    "hookScript": "Cyprus is a fantastic entry point into Europe with high acceptance rates. We can do direct admission with an internal test. Can you come in for an initial chat?"
+    "hookScript": "Cyprus is a fantastic entry point into Europe with high acceptance rates. We can do direct admission with an internal test. Can you come in for an initial chat?",
+    "customValues": {}
   },
   {
     "id": "malaysia",
     "name": "Malaysia",
-    "ageLimit": 40,
-    "gapYearsAccepted": 15,
-    "acceptedOlQuals": [
-      "Pass",
-      "Fail"
-    ],
-    "acceptedAlQuals": [
-      "3S",
-      "3C",
-      "3B"
-    ],
-    "acceptedDegreeStatus": [
-      "Completed",
-      "Pending"
-    ],
-    "acceptedGpa": [
-      "2.0",
-      "2.5",
-      "3.0"
-    ],
-    "acceptedDegreeClass": [
-      "Second Class Lower",
-      "Second Class Upper",
-      "First Class"
-    ],
-    "englishRequirement": "Internal placement",
+    "ageLimitUG": 40,
+    "ageLimitPG": 40,
+    "acceptedOlQuals": ["Pass"],
+    "acceptedAlQuals": ["3S", "3C", "3B"],
+    "acceptedDegreeStatus": ["Completed", "Pending"],
+    "acceptedGpa": ["2.0", "2.5", "3.0"],
+    "acceptedDegreeClass": ["Second Class Lower", "Second Class Upper", "First Class"],
+    "englishRequirement": "Internal placement test",
     "bankProofAndCost": "LKR 3–4 Million bank guarantee",
-    "hookScript": "Malaysia offers a world-class education very close to home at a fraction of the cost. The intake is filling up fast. Let's submit your passport copy tomorrow."
+    "hookScript": "Malaysia offers a world-class education very close to home at a fraction of the cost. The intake is filling up fast. Let's submit your passport copy tomorrow.",
+    "customValues": {}
   },
   {
     "id": "dubai",
     "name": "Dubai (UAE)",
-    "ageLimit": 55,
-    "gapYearsAccepted": 20,
-    "acceptedOlQuals": [
-      "Pass",
-      "Fail"
-    ],
-    "acceptedAlQuals": [
-      "3S",
-      "3C",
-      "3B"
-    ],
-    "acceptedDegreeStatus": [
-      "Completed",
-      "Pending"
-    ],
-    "acceptedGpa": [
-      "2.0",
-      "2.5",
-      "3.0"
-    ],
-    "acceptedDegreeClass": [
-      "Second Class Lower",
-      "Second Class Upper",
-      "First Class"
-    ],
-    "englishRequirement": "No IELTS mandatory",
+    "ageLimitUG": 55,
+    "ageLimitPG": 55,
+    "acceptedOlQuals": ["Pass", "Fail"],
+    "acceptedAlQuals": ["3S", "3C", "3B", "None"],
+    "acceptedDegreeStatus": ["Completed", "Pending", "Haven't done at all"],
+    "acceptedGpa": ["2.0", "2.5", "3.0"],
+    "acceptedDegreeClass": ["Second Class Lower", "Second Class Upper", "First Class"],
+    "englishRequirement": "No IELTS mandatory — university sponsor handles visa",
     "bankProofAndCost": "Visa issued via university sponsor",
-    "hookScript": "Dubai has the lowest scrutiny and almost guaranteed visa via university sponsorship. If you are looking for an immediate start, this is it. Let's meet."
+    "hookScript": "Dubai has the lowest scrutiny and almost guaranteed visa via university sponsorship. If you are looking for an immediate start, this is it. Let's meet.",
+    "customValues": {}
   }
 ]

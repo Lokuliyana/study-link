@@ -77,7 +77,8 @@ export default function CountriesMatrixPage() {
     const newRule: CountryRule = {
       id: newId,
       name: 'New Country',
-      ageLimit: 30,
+      ageLimitUG: 30,
+      ageLimitPG: 40,
       acceptedOlQuals: [],
       acceptedAlQuals: [],
       acceptedDegreeStatus: [],
@@ -302,11 +303,20 @@ export default function CountriesMatrixPage() {
                             </button>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className="text-xs text-gray-600">Max Age</span>
+                            <span className="text-xs text-gray-600">UG Max Age</span>
                             <input
                               type="number"
-                              value={rule.ageLimit ?? 30}
-                              onChange={(e) => updateRule(rule.id, 'ageLimit', parseInt(e.target.value) || 30)}
+                              value={rule.ageLimitUG ?? 30}
+                              onChange={(e) => updateRule(rule.id, 'ageLimitUG', parseInt(e.target.value) || 30)}
+                              className="w-16 border rounded px-1.5 py-1 text-xs"
+                            />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs text-gray-600">PG Max Age</span>
+                            <input
+                              type="number"
+                              value={rule.ageLimitPG ?? 40}
+                              onChange={(e) => updateRule(rule.id, 'ageLimitPG', parseInt(e.target.value) || 40)}
                               className="w-16 border rounded px-1.5 py-1 text-xs"
                             />
                           </div>
@@ -333,7 +343,10 @@ export default function CountriesMatrixPage() {
                         <div>
                           <div className="font-bold text-gray-900 text-base mb-2">{rule.name}</div>
                           <div className="flex flex-col gap-1.5">
-                            <span className="bg-gray-100 text-gray-700 text-xs px-2 py-0.5 rounded font-medium w-fit">Age &lt; {rule.ageLimit}</span>
+                            <div className="flex gap-1.5">
+                              <span className="bg-blue-50 text-blue-700 border border-blue-100 text-xs px-2 py-0.5 rounded font-medium">UG &lt; {rule.ageLimitUG}</span>
+                              <span className="bg-purple-50 text-purple-700 border border-purple-100 text-xs px-2 py-0.5 rounded font-medium">PG &lt; {rule.ageLimitPG}</span>
+                            </div>
                             {rule.englishRequirement && (
                               <span className="bg-green-50 border border-green-100 text-green-700 text-[11px] px-2 py-0.5 rounded w-fit">{rule.englishRequirement}</span>
                             )}

@@ -3,27 +3,36 @@ export type ALQualification = '3S' | '3C' | '3B' | 'None';
 export type DegreeStatus = 'Completed' | 'Pending' | "Haven't done at all";
 export type GPAScore = '2.0' | '2.5' | '3.0' | 'None';
 export type DegreeClass = 'Second Class Lower' | 'Second Class Upper' | 'First Class' | 'None';
+export type StudyLevel = 'UG' | 'PG' | 'Either';
 
 export interface CustomField {
-  key: string;       // e.g. "acceptedWorkExp"
-  label: string;     // e.g. "Work Experience"
-  options: string[]; // e.g. ["None", "1-2 years", "3+ years"]
+  key: string;
+  label: string;
+  options: string[];
 }
 
 export interface CountryRule {
   id: string;
   name: string;
-  ageLimit: number;
+  // Separate age limits for UG and PG
+  ageLimitUG: number;
+  ageLimitPG: number;
+  // UG qualification gates
   acceptedOlQuals: OLQualification[];
   acceptedAlQuals: ALQualification[];
+  // PG qualification gates
   acceptedDegreeStatus: DegreeStatus[];
   acceptedGpa: GPAScore[];
   acceptedDegreeClass: DegreeClass[];
   englishRequirement: string;
   bankProofAndCost: string;
   hookScript: string;
-  // Dynamic custom fields values, keyed by field.key
   customValues?: Record<string, string[]>;
+}
+
+// Returned by matcher — annotates which level each country is eligible for
+export interface EligibleCountry extends CountryRule {
+  eligibleFor: 'UG' | 'PG' | 'Both';
 }
 
 export interface StudentProfile {
@@ -34,6 +43,14 @@ export interface StudentProfile {
   gpa: GPAScore;
   degreeClass: DegreeClass;
   englishTest: string;
+  // New expanded profile fields (not used in matching — stored for counselor reference)
+  studyGap?: string;
+  workExperience?: string;
+  preferredField?: string;
+  preferredStudyLevel?: StudyLevel;
+  budget?: string;
+  preferredCountry?: string;
+  otherRequirements?: string;
   // Dynamic custom field values
   customValues?: Record<string, string>;
 }

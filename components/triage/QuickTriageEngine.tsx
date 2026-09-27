@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { StudentProfile, CountryRule, OLQualification, ALQualification, DegreeStatus, GPAScore, DegreeClass, CustomField } from '@/lib/types';
+import { StudentProfile, EligibleCountry, OLQualification, ALQualification, DegreeStatus, GPAScore, DegreeClass, CustomField, StudyLevel, CountryRule } from '@/lib/types';
 import { matchCountries } from '@/lib/matcher';
 import { CountryCard } from './CountryCard';
 import { CallScriptModal } from './CallScriptModal';
-import { Sparkles, User, GraduationCap, CheckCircle } from 'lucide-react';
+import { Sparkles, User, GraduationCap, CheckCircle, ChevronDown } from 'lucide-react';
 
 export function QuickTriageEngine() {
   const [profile, setProfile] = useState<StudentProfile>({
@@ -16,11 +16,19 @@ export function QuickTriageEngine() {
     gpa: 'None',
     degreeClass: 'None',
     englishTest: 'None',
+    studyGap: '',
+    workExperience: '',
+    preferredField: '',
+    preferredStudyLevel: 'Either',
+    budget: '',
+    preferredCountry: '',
+    otherRequirements: '',
   });
 
-  const [selectedCountry, setSelectedCountry] = useState<CountryRule | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<EligibleCountry | null>(null);
   const [rules, setRules] = useState<CountryRule[]>([]);
   const [customFields, setCustomFields] = useState<CustomField[]>([]);
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const ageInputRef = useRef<HTMLInputElement>(null);
 
   // Focus age input on mount
@@ -239,8 +247,104 @@ export function QuickTriageEngine() {
           ))}
         </div>
 
+        {/* Advanced Counselor Profile — stored but not used in filtering */}
+        <div className="mt-6 border border-gray-100 rounded-2xl overflow-hidden">
+          <button
+            onClick={() => setShowAdvanced(!showAdvanced)}
+            className="w-full flex items-center justify-between px-6 py-4 bg-gray-50/50 hover:bg-gray-100/50 transition-colors text-sm font-semibold text-gray-600"
+          >
+            <span>Student Profile — Additional Info (saved with lead)</span>
+            <ChevronDown className={`w-4 h-4 transition-transform ${showAdvanced ? 'rotate-180' : ''}`} />
+          </button>
+          {showAdvanced && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6 bg-gray-50/20">
+              {/* Preferred Study Level */}
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Preferred Study Level</label>
+                <div className="flex gap-2">
+                  {(['UG', 'PG', 'Either'] as StudyLevel[]).map(l => (
+                    <button key={l} onClick={() => updateProfile('preferredStudyLevel', l)} className={chipClass(profile.preferredStudyLevel === l)}>{l}</button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Study Gap */}
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Study Gap</label>
+                <input
+                  type="text"
+                  placeholder="e.g. 2 years"
+                  className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none"
+                  value={profile.studyGap || ''}
+                  onChange={e => updateProfile('studyGap', e.target.value)}
+                />
+              </div>
+
+              {/* Work Experience */}
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Work Experience</label>
+                <input
+                  type="text"
+                  placeholder="e.g. 3 years IT sector"
+                  className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none"
+                  value={profile.workExperience || ''}
+                  onChange={e => updateProfile('workExperience', e.target.value)}
+                />
+              </div>
+
+              {/* Preferred Field */}
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Preferred Field / Course</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Business, IT, Engineering"
+                  className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none"
+                  value={profile.preferredField || ''}
+                  onChange={e => updateProfile('preferredField', e.target.value)}
+                />
+              </div>
+
+              {/* Budget */}
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Budget</label>
+                <input
+                  type="text"
+                  placeholder="e.g. 20 Lakhs"
+                  className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none"
+                  value={profile.budget || ''}
+                  onChange={e => updateProfile('budget', e.target.value)}
+                />
+              </div>
+
+              {/* Preferred Country */}
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Preferred Country</label>
+                <input
+                  type="text"
+                  placeholder="e.g. UK, Latvia"
+                  className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none"
+                  value={profile.preferredCountry || ''}
+                  onChange={e => updateProfile('preferredCountry', e.target.value)}
+                />
+              </div>
+
+              {/* Other Requirements */}
+              <div className="space-y-2 sm:col-span-2 lg:col-span-3">
+                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Other Requirements / Notes</label>
+                <textarea
+                  rows={2}
+                  placeholder="Any special requirements the student mentioned..."
+                  className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none resize-none"
+                  value={profile.otherRequirements || ''}
+                  onChange={e => updateProfile('otherRequirements', e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Results */}
-        <div>
+        <div className="mt-8">
           {eligibleCountries.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {eligibleCountries.map(country => (

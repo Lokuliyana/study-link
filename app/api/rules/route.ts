@@ -5,19 +5,20 @@ import { CountryRule } from '@/lib/types';
 import fs from 'fs/promises';
 import path from 'path';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const forceReseed = searchParams.get('reseed') === '1';
     const rulesCol = collection(db, 'rules');
     const snapshot = await getDocs(rulesCol);
-    
+
     let rules: CountryRule[] = [];
-    
-    if (snapshot.empty) {
-      // Seed the database from local JSON if empty
+
+    if (snapshot.empty || forceReseed) {
       const rulesFilePath = path.join(process.cwd(), 'lib/data/country-rules.json');
       const data = await fs.readFile(rulesFilePath, 'utf8');
       rules = JSON.parse(data);
-      
+
       const batch = writeBatch(db);
       rules.forEach(rule => {
         const ref = doc(db, 'rules', rule.id);
@@ -27,7 +28,7 @@ export async function GET() {
     } else {
       rules = snapshot.docs.map(doc => doc.data() as CountryRule);
     }
-    
+
     return NextResponse.json(rules);
   } catch (error) {
     console.error('Firebase Rules GET Error:', error);
@@ -39,12 +40,12 @@ export async function POST(request: Request) {
   try {
     const updatedRules: CountryRule[] = await request.json();
     const batch = writeBatch(db);
-    
+
     updatedRules.forEach(rule => {
       const ref = doc(db, 'rules', rule.id);
       batch.set(ref, rule);
     });
-    
+
     await batch.commit();
     return NextResponse.json({ success: true });
   } catch (error) {

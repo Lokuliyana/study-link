@@ -1,5 +1,7 @@
 import { Lead } from '@/lib/types';
-import { MessageSquare, Calendar, Globe, Clock, Trash2 } from 'lucide-react';
+import { MessageSquare, Calendar, Globe, Clock, Trash2, FileUser } from 'lucide-react';
+import { useState } from 'react';
+import { StudentProfileModal } from './StudentProfileModal';
 
 interface LeadCardProps {
   lead: Lead;
@@ -8,6 +10,7 @@ interface LeadCardProps {
 }
 
 export function LeadCard({ lead, onStageChange, onDelete }: LeadCardProps) {
+  const [showProfile, setShowProfile] = useState(false);
   const handleWhatsApp = () => {
     const cleanPhone = lead.phone.replace(/[^0-9]/g, '');
     const url = `https://wa.me/${cleanPhone}?text=Hi ${lead.name}, this is Study Link regarding your application for ${lead.matchedCountry || 'studies abroad'}. Please bring your certificates to our Nugegoda office.`;
@@ -39,6 +42,15 @@ export function LeadCard({ lead, onStageChange, onDelete }: LeadCardProps) {
           >
             <MessageSquare className="w-3.5 h-3.5" />
           </button>
+          {lead.profile && (
+            <button
+              onClick={() => setShowProfile(true)}
+              className="text-blue-500 bg-blue-50 hover:bg-blue-100 p-1.5 rounded-full transition-colors border border-blue-100/50"
+              title="View Student Profile"
+            >
+              <FileUser className="w-3.5 h-3.5" />
+            </button>
+          )}
           {onDelete && (
             <button
               onClick={() => onDelete(lead.id)}
@@ -78,6 +90,10 @@ export function LeadCard({ lead, onStageChange, onDelete }: LeadCardProps) {
         <option value="Visa Lodged">Visa Lodged</option>
         <option value="Closed / Enrolled">Closed / Enrolled</option>
       </select>
+
+      {showProfile && (
+        <StudentProfileModal lead={lead} onClose={() => setShowProfile(false)} />
+      )}
     </div>
   );
 }
