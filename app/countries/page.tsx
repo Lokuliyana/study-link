@@ -400,12 +400,15 @@ export default function CountriesMatrixPage() {
                     {/* Hook Script */}
                     <td className="px-8 py-6 align-top border-l border-gray-50/50">
                       {isEditing ? (
-                        <textarea
-                          value={rule.hookScript ?? ''}
-                          onChange={(e) => updateRule(rule.id, 'hookScript', e.target.value)}
-                          className="w-full h-32 text-sm border border-blue-200 bg-blue-50/50 rounded-2xl p-4 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none resize-none transition-all shadow-inner"
-                          placeholder="Enter counselor pitch script..."
-                        />
+                        <div className="flex flex-col h-full">
+                          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-2.5">Pitch Script</span>
+                          <textarea
+                            value={rule.hookScript ?? ''}
+                            onChange={(e) => updateRule(rule.id, 'hookScript', e.target.value)}
+                            className="w-full min-h-[180px] text-sm text-gray-700 bg-white border border-gray-200 rounded-xl p-4 focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-500/10 transition-all shadow-sm leading-relaxed resize-y"
+                            placeholder="Enter counselor pitch script..."
+                          />
+                        </div>
                       ) : (
                         <div className="bg-gradient-to-br from-blue-50/80 to-blue-50/30 border border-blue-100/80 rounded-2xl p-4 relative group shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
                           <Info className="w-4 h-4 text-blue-400 absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity" />
